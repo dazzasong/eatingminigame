@@ -20,10 +20,12 @@ export default function Food() {
     ]
   ];
 
-  const eat1 = new Audio("sfx/eat1.mp3");
-  const eat2 = new Audio("sfx/eat2.mp3");
-  const drink1 = new Audio("sfx/drink1.mp3");
-  const drink2 = new Audio("sfx/drink2.mp3");
+  const eat1 = new Audio("sfx/eat/eat1.mp3");
+  const eat2 = new Audio("sfx/eat/eat2.mp3");
+  const eat3 = new Audio("sfx/eat/eat3.mp3");
+  const drink1 = new Audio("sfx/drink/drink1.mp3");
+  const drink2 = new Audio("sfx/drink/drink2.mp3");
+  const drink3 = new Audio("sfx/drink/drink3.mp3");
 
   const type = Math.floor(Math.random() * 2);
   const randomFood = () => {
@@ -34,7 +36,7 @@ export default function Food() {
   const [isConsumed, setIsConsumed] = useState(false);
   const consume = () => {
     setIsConsumed(true);
-    const randomSfx = Math.floor(Math.random() * 2);
+    const randomSfx = Math.floor(Math.random() * 3);
     if (type === 0) {
       switch (randomSfx) {
         case 0:
@@ -42,6 +44,9 @@ export default function Food() {
           break;
         case 1:
           eat2.play();
+          break;
+        case 2:
+          eat3.play();
           break;
         default:
           throw new Error("Invalid randomSfx!");
@@ -53,6 +58,9 @@ export default function Food() {
           break;
         case 1:
           drink2.play();
+          break;
+        case 2:
+          drink3.play();
           break;
         default:
           throw new Error("Invalid randomSfx!");
