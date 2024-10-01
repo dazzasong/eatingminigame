@@ -5,7 +5,6 @@ import { Stack } from "@mui/material";
 function App() {
   return (
     <div>
-      <TopBar />
       <Stack direction="row">
         <div>
           <Food />
