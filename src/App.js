@@ -1,13 +1,25 @@
 import TopBar from "./TopBar/TopBar";
 import Food from "./Food";
+import { Stack } from "@mui/material";
 
 function App() {
   return (
     <div>
       <TopBar />
-      <Food />
-      <Food />
-      <Food />
+      <Stack direction="row">
+        <div>
+          <Food />
+          <Food />
+        </div>
+        <div>
+          <Food />
+          <Food />
+        </div>
+        <div>
+          <Food />
+          <Food />
+        </div>  
+      </Stack>
     </div>
   );
 }
