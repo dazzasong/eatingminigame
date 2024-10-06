@@ -6,18 +6,9 @@ function App() {
   return (
     <div>
       <Stack direction="row">
-        <div>
-          <Food />
-          <Food />
-        </div>
-        <div>
-          <Food />
-          <Food />
-        </div>
-        <div>
-          <Food />
-          <Food />
-        </div>  
+        <Food />
+        <Food />
+        <Food />
       </Stack>
     </div>
   );

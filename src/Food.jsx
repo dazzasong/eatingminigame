@@ -16,7 +16,7 @@ export default function Food() {
       "img/drink/lemonade.png",
       "img/drink/orange-juice.png",
       "img/drink/apple-juice.png",
-      "img/drink/milkshake.png"
+      "img/drink/coffee.png"
     ]
   ];
 
