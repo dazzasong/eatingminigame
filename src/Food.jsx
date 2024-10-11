@@ -8,7 +8,8 @@ export default function Food() {
       "img/food/fries.png",
       "img/food/hotdog.png",
       "img/food/ice-cream.png",
-      "img/food/waffle.png"
+      "img/food/waffle.png",
+      "img/food/chips.png"
     ],
     [ // Drinks
       "img/drink/water.png",
