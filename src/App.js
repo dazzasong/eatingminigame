@@ -40,7 +40,7 @@ function App() {
 
     setFoods((prevFood) => [...prevFood, newFood]);
 
-    /* Remove the food after 4 seconds
+    /* Remove food after 4 seconds
     setTimeout(() => {
       setFoods((prevFood) => prevFood.filter((food) => food.id !== id));
     }, 4000);
@@ -48,13 +48,13 @@ function App() {
   };
 
   useEffect(() => {
-    // Adds a random food every 4 seconds
+    // Adds a random food every 3 seconds
     const interval = setInterval(() => {
       addRandomFood();
-    }, 4000);
+    }, 3000);
 
     return () => clearInterval(interval);
-  }, [])
+  })
 
   return (
     <Box

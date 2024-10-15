@@ -51,7 +51,7 @@ export default function Food({ src, type }) {
           alt=""
           width={240}
           onClick={consume}
-          style={{ cursor: "grab" }}
+          style={{ cursor: "grab", userSelect: "none" }}
         />
       )}
     </div>
