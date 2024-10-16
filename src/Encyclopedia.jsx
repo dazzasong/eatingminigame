@@ -34,12 +34,12 @@ function Entry({ subject, src, healthy, description, stats }) {
 }
 
 export default function Encyclopedia() {
-  const entries = [
+  const foodEntries = [
     {
       subject: "Apple",
       src: "img/food/apple.png",
       healthy: true,
-      description: "A fruit, comes in red and green. Has skin rich in vitamins and minerals. Sweet and juicy inside. Contains hard seeds in the core.",
+      description: "A sweet and juicy fruit. Has skin rich in vitamins. Contains hard seeds in the core.",
       stats: {
         calories: 52,
         hunger: 2,
@@ -50,7 +50,7 @@ export default function Encyclopedia() {
       subject: "Banana",
       src: "img/food/banana.png",
       healthy: true,
-      description: "A yellow fruit. The skin cannot be consumed. Rich in potassium.",
+      description: "A fruit. The skin cannot be consumed. Rich in potassium.",
       stats: {
         calories: 89,
         hunger: 2,
@@ -61,7 +61,7 @@ export default function Encyclopedia() {
       subject: "Burger",
       src: "img/food/burger.png",
       healthy: false,
-      description: "A grilled meat patty between two buns. Can contain vegetables, cheese, sauces and other meats such as bacon.",
+      description: "A grilled patty between two buns. Can contain veggies, cheese, sauces and other meats.",
       stats: {
         calories: 295,
         hunger: 6,
@@ -105,7 +105,7 @@ export default function Encyclopedia() {
       subject: "Ice cream",
       src: "img/food/ice-cream.png",
       healthy: false,
-      description: "Cream and other flavorings chilled to ice. Can be topped with sprinkles.",
+      description: "Cream and other flavorings chilled to ice. Can be topped with sprinkles. High in sugar.",
       stats: {
         calories: 207,
         hunger: 4,
@@ -116,7 +116,7 @@ export default function Encyclopedia() {
       subject: "Waffle",
       src: "img/food/waffle.png",
       healthy: false,
-      description: "Cooked batter in the form of a circle with cube markings in it. Topped with syrup and various other toppings.",
+      description: "Batter in the form of a circle with a pattern. Syrup is poured onto it.",
       stats: {
         calories: 207,
         hunger: 4,
@@ -125,11 +125,96 @@ export default function Encyclopedia() {
     }
   ];
 
+  const drinkEntries = [
+    {
+      subject: "Water",
+      src: "img/drink/water.png",
+      healthy: true,
+      description: "Pure, fresh water.",
+      stats: {
+        calories: 0,
+        hunger: 0,
+        thirst: 8
+      }
+    },
+    {
+      subject: "Milk",
+      src: "img/drink/milk.png",
+      healthy: true,
+      description: "Fresh whole milk from the cow. Rich in calcium.",
+      stats: {
+        calories: 148,
+        hunger: 1.5,
+        thirst: 7.5
+      }
+    },
+    {
+      subject: "Lemonade",
+      src: "img/drink/lemonade.png",
+      healthy: true,
+      description: "Freshly squeezed lemons. Water and sugar is added.",
+      stats: {
+        calories: 99,
+        hunger: 0,
+        thirst: 7
+      }
+    },
+    {
+      subject: "Orange juice",
+      src: "img/drink/orange-juice.png",
+      healthy: true,
+      description: "Freshly squeezed orange juice. High in vitamin C.",
+      stats: {
+        calories: 111,
+        hunger: 0,
+        thirst: 6
+      }
+    },
+    {
+      subject: "Apple juice",
+      src: "img/drink/apple-juice.png",
+      healthy: false,
+      description: "Fresh bottled apple juice. High in sugar.",
+      stats: {
+        calories: 113,
+        hunger: 0,
+        thirst: 6
+      }
+    },
+    {
+      subject: "Coke",
+      src: "img/drink/coke.png",
+      healthy: false,
+      description: "A can of coke.",
+      stats: {
+        calories: 161,
+        hunger: 0,
+        thirst: 5
+      }
+    },
+    {
+      subject: "Coffee",
+      src: "img/drink/coffee.png",
+      healthy: false,
+      description: "Various different types. Provides high energy with negative side effects.",
+      stats: {
+        calories: 0,
+        hunger: 0,
+        thirst: 4
+      }
+    }
+  ];
+
   return (
     <Stack>
       <Typography>Food Encyclopedia</Typography>
       <Stack direction="row" spacing={10}>
-        {entries.map((entry) => (
+        {foodEntries.map((entry) => (
+          <Entry subject={entry.subject} src={entry.src} healthy={entry.healthy} description={entry.description} stats={entry.stats} />
+        ))}
+      </Stack>
+      <Stack direction="row" spacing={10}>
+        {drinkEntries.map((entry) => (
           <Entry subject={entry.subject} src={entry.src} healthy={entry.healthy} description={entry.description} stats={entry.stats} />
         ))}
       </Stack>
