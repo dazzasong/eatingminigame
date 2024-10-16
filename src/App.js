@@ -1,11 +1,20 @@
+import Encyclopedia from "./Encyclopedia";
 import Food from "./Food";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Box } from "@mui/material";
 
 function App() {
+  const eat1 = useRef(new Audio("sfx/eat/eat1.mp3"));
+  const eat2 = useRef(new Audio("sfx/eat/eat2.mp3"));
+  const eat3 = useRef(new Audio("sfx/eat/eat3.mp3"));
+  const drink1 = useRef(new Audio("sfx/drink/drink1.mp3"));
+  const drink2 = useRef(new Audio("sfx/drink/drink2.mp3"));
+  const drink3 = useRef(new Audio("sfx/drink/drink3.mp3"));
+
   const srcs = [
     [ // Food
       "img/food/apple.png",
+      "img/food/banana.png",
       "img/food/burger.png",
       "img/food/fries.png",
       "img/food/hotdog.png",
@@ -34,28 +43,67 @@ function App() {
       id,
       src: srcs[type][randSrc],
       type,
-      top: `${Math.random() * 90}vh`, // Random position within viewport height
-      left: `${Math.random() * 90}vw` // Random position within viewport width
+      top: `${Math.random() * (100 - (240 / window.innerHeight) * 100)}vh`,
+      left: `${Math.random() * (100 - (240 / window.innerWidth) * 100)}vw`
     };
 
     setFoods((prevFood) => [...prevFood, newFood]);
 
-    /* Remove food after 4 seconds
+    // Remove food after 1 second
     setTimeout(() => {
       setFoods((prevFood) => prevFood.filter((food) => food.id !== id));
-    }, 4000);
-    */
+    }, 1000);
   };
 
+  const consume = (id, type) => {
+    setFoods((prevFood) => prevFood.filter((food) => food.id !== id));
+    const randomSfx = Math.floor(Math.random() * 3);
+    if (type === 0) {
+      switch (randomSfx) {
+        case 0:
+          if (!eat1.current.paused) eat1.current.currentTime = 0; // Restart if already playing
+          eat1.current.play().catch((error) => console.error("Audio play error:", error));
+          break;
+        case 1:
+          if (!eat2.current.paused) eat2.current.currentTime = 0;
+          eat2.current.play().catch((error) => console.error("Audio play error:", error));
+          break;
+        case 2:
+          if (!eat3.current.paused) eat3.current.currentTime = 0;
+          eat3.current.play().catch((error) => console.error("Audio play error:", error));
+          break;
+        default:
+          throw new Error("Invalid randomSfx!");
+      }
+    } else {
+      switch (randomSfx) {
+        case 0:
+          if (!drink1.current.paused) drink1.current.currentTime = 0;
+          drink1.current.play().catch((error) => console.error("Audio play error:", error));
+          break;
+        case 1:
+          if (!drink2.current.paused) drink2.current.currentTime = 0;
+          drink2.current.play().catch((error) => console.error("Audio play error:", error));
+          break;
+        case 2:
+          if (!drink3.current.paused) drink3.current.currentTime = 0;
+          drink3.current.play().catch((error) => console.error("Audio play error:", error));
+          break;
+        default:
+          throw new Error("Invalid randomSfx!");
+      }
+    }
+  }
+/* temporary disable
   useEffect(() => {
-    // Adds a random food every 3 seconds
+    // Adds a random food every second
     const interval = setInterval(() => {
       addRandomFood();
-    }, 3000);
+    }, 1000);
 
     return () => clearInterval(interval);
   })
-
+*/
   return (
     <Box
       position="relative"
@@ -63,15 +111,19 @@ function App() {
       height="100vh"
     >
       {foods.map((food) => (
-        <Box
+        <div
           key={food.id}
-          position="absolute"
-          top={food.top}
-          left={food.left}
+          onClick={() => consume(food.id, food.type)}
+          style={{
+            position: "absolute",
+            top: food.top,
+            left: food.left
+          }}
         >
-          <Food src={food.src} type={food.type} />
-        </Box>
+          <Food src={food.src} />
+        </div>
       ))}
+      <Encyclopedia />
     </Box>
   );
 }
