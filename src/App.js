@@ -1,7 +1,8 @@
 import Encyclopedia from "./Encyclopedia";
 import Food from "./Food";
 import { useEffect, useRef, useState } from "react";
-import { Box } from "@mui/material";
+import { Box, Fab } from "@mui/material";
+import { ArrowBack, AutoStories } from "@mui/icons-material";
 
 function App() {
   const eat1 = useRef(new Audio("sfx/eat/eat1.mp3"));
@@ -31,6 +32,8 @@ function App() {
       "img/drink/coffee.png"
     ]
   ];
+
+  const [encyclopediaOpened, setEncyclopediaOpened] = useState(false);
 
   const [foods, setFoods] = useState([]);
 
@@ -123,7 +126,17 @@ function App() {
           <Food src={food.src} />
         </div>
       ))}
-      <Encyclopedia />
+      { encyclopediaOpened &&
+        <Encyclopedia />
+      }
+      <Fab onClick={() => setEncyclopediaOpened(!encyclopediaOpened)} color="primary" sx={{ position: "fixed", bottom: 14, left: 14 }}>
+        { encyclopediaOpened &&
+          <ArrowBack />
+        }
+        { !encyclopediaOpened &&
+          <AutoStories />
+        }
+      </Fab>
     </Box>
   );
 }
