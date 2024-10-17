@@ -14,7 +14,7 @@ function Entry({ subject, src, healthy, description, stats }) {
       />
       <Typography color={healthy ? "success" : "error"} fontWeight="bold"><u>{healthy ? "HEALTHY" : "UNHEALTHY"}</u></Typography>
       <Typography sx={{ userSelect: "none" }}>{description}</Typography>
-      <List dense>
+      <List dense sx={{ userSelect: "none" }}>
         <ListSubheader>Stats</ListSubheader>
         <ListItem>
           <ListItemIcon><CookieOutlined /></ListItemIcon>
