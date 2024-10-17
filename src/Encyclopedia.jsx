@@ -160,8 +160,8 @@ export default function Encyclopedia() {
       }
     },
     {
-      subject: "Orange juice",
-      src: "img/drink/orange-juice.png",
+      subject: "Fresh Orange juice",
+      src: "img/drink/fresh-orange-juice.png",
       healthy: true,
       description: "Freshly squeezed orange juice. High in vitamin C.",
       stats: {
@@ -174,7 +174,7 @@ export default function Encyclopedia() {
       subject: "Apple juice",
       src: "img/drink/apple-juice.png",
       healthy: false,
-      description: "Fresh bottled apple juice. High in sugar.",
+      description: "Fresh bottled apple juice. High in sugar. Preservatives are added.",
       stats: {
         calories: 113,
         hunger: 0,
