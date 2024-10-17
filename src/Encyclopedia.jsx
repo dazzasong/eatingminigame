@@ -41,7 +41,7 @@ export default function Encyclopedia() {
       healthy: true,
       description: "A sweet and juicy fruit. Has skin rich in vitamins. Contains hard seeds in the core.",
       stats: {
-        calories: 52,
+        calories: 95,
         hunger: 2,
         thirst: 1
       }
@@ -52,7 +52,7 @@ export default function Encyclopedia() {
       healthy: true,
       description: "A fruit. The skin cannot be consumed. Rich in potassium.",
       stats: {
-        calories: 89,
+        calories: 105,
         hunger: 2,
         thirst: 0
       }
@@ -63,7 +63,7 @@ export default function Encyclopedia() {
       healthy: false,
       description: "A grilled patty between two buns. Can contain veggies, cheese, sauces and other meats.",
       stats: {
-        calories: 295,
+        calories: 254,
         hunger: 6,
         thirst: -2
       }
@@ -76,7 +76,7 @@ export default function Encyclopedia() {
       stats: {
         calories: 240,
         hunger: 4,
-        thirst: -4
+        thirst: -3
       }
     },
     {
@@ -85,9 +85,9 @@ export default function Encyclopedia() {
       healthy: false,
       description: "Rectangular-cut potatoes deep-fried in oil. Salt is added.",
       stats: {
-        calories: "UNKNOWN",
+        calories: 378,
         hunger: 4,
-        thirst: -4
+        thirst: -3
       }
     },
     {
@@ -96,7 +96,7 @@ export default function Encyclopedia() {
       healthy: false,
       description: "A grilled sausage placed between two buns. Sauce and other toppings are added.",
       stats: {
-        calories: 290,
+        calories: 151,
         hunger: 6,
         thirst: -2
       }
@@ -107,7 +107,7 @@ export default function Encyclopedia() {
       healthy: false,
       description: "Cream and other flavorings chilled to ice. Can be topped with sprinkles. High in sugar.",
       stats: {
-        calories: 207,
+        calories: 137,
         hunger: 4,
         thirst: 2
       }
@@ -118,9 +118,9 @@ export default function Encyclopedia() {
       healthy: false,
       description: "Batter in the form of a circle with a pattern. Syrup is poured onto it.",
       stats: {
-        calories: 207,
+        calories: 218,
         hunger: 4,
-        thirst: 2
+        thirst: -2
       }
     }
   ];
@@ -144,7 +144,7 @@ export default function Encyclopedia() {
       description: "Fresh whole milk from the cow. Rich in calcium.",
       stats: {
         calories: 148,
-        hunger: 1.5,
+        hunger: 1,
         thirst: 7.5
       }
     },
@@ -198,7 +198,7 @@ export default function Encyclopedia() {
       healthy: false,
       description: "A can of Fanta. Carbonated and orange-flavored.",
       stats: {
-        calories: 161,
+        calories: 174,
         hunger: 0,
         thirst: 5
       }
@@ -210,7 +210,7 @@ export default function Encyclopedia() {
       description: "Various different types. Provides high energy with negative side effects.",
       stats: {
         calories: 0,
-        hunger: 0,
+        hunger: 0.5,
         thirst: 4
       }
     }
