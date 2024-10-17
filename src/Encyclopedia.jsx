@@ -185,7 +185,18 @@ export default function Encyclopedia() {
       subject: "Coke",
       src: "img/drink/coke.png",
       healthy: false,
-      description: "A can of coke.",
+      description: "A can of Coke. Carbonated.",
+      stats: {
+        calories: 161,
+        hunger: 0,
+        thirst: 5
+      }
+    },
+    {
+      subject: "Fanta",
+      src: "img/drink/fanta.png",
+      healthy: false,
+      description: "A can of Fanta. Carbonated and orange-flavored.",
       stats: {
         calories: 161,
         hunger: 0,

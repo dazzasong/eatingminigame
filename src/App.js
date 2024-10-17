@@ -27,8 +27,10 @@ function App() {
       "img/drink/water.png",
       "img/drink/milk.png",
       "img/drink/lemonade.png",
-      "img/drink/orange-juice.png",
+      "img/drink/fresh-orange-juice.png",
       "img/drink/apple-juice.png",
+      "img/drink/coke.png",
+      "img/drink/fanta.png",
       "img/drink/coffee.png"
     ]
   ];
