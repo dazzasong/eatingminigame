@@ -1,8 +1,9 @@
 import Encyclopedia from "./Encyclopedia";
 import Food from "./Food";
 import { useEffect, useRef, useState } from "react";
-import { Box, Fab } from "@mui/material";
+import { Box, Button, Fab, Stack, Typography } from "@mui/material";
 import { ArrowBack, AutoStories } from "@mui/icons-material";
+import Stats from "./Stats/Stats";
 
 function App() {
   const eat1 = useRef(new Audio("sfx/eat/eat1.mp3"));
@@ -38,6 +39,44 @@ function App() {
   const [encyclopediaOpened, setEncyclopediaOpened] = useState(false);
 
   const [foods, setFoods] = useState([]);
+
+  const [health, setHealth] = useState(100);
+  const [hunger, setHunger] = useState(100);
+  const [thirst, setThirst] = useState(100);
+  const [calories, setCalories] = useState(0);
+  const [totalConsumed, setTotalConsumed] = useState(0);
+
+  useEffect(() => {
+    if (health > 0 && (hunger < 1 || thirst < 1)) {
+      const interval = setInterval(() => {
+        setHealth(health-5);
+      }, 1000);
+
+      return () => clearInterval(interval);
+    }
+
+  });
+
+  useEffect(() => {
+    if (hunger > 0) {
+      const interval = setInterval(() => {
+        setHunger(hunger-2);
+      }, 1000);
+
+      return () => clearInterval(interval);
+    }
+
+  });
+
+  useEffect(() => {
+    if (thirst > 0) {
+      const interval = setInterval(() => {
+        setThirst(thirst-2);
+      }, 1000);
+  
+      return () => clearInterval(interval);
+    }
+  });
 
   const addRandomFood = () => {
     const id = Math.random().toString(36).slice(2, 11);
@@ -99,7 +138,7 @@ function App() {
       }
     }
   }
-/* temporary disable
+
   useEffect(() => {
     // Adds a random food every second
     const interval = setInterval(() => {
@@ -107,31 +146,60 @@ function App() {
     }, 1000);
 
     return () => clearInterval(interval);
-  })
-*/
+  });
+
   return (
     <Box
       position="relative"
       width="100vw"
       height="100vh"
     >
-      {foods.map((food) => (
-        <div
-          key={food.id}
-          onClick={() => consume(food.id, food.type)}
-          style={{
-            position: "absolute",
-            top: food.top,
-            left: food.left
-          }}
-        >
-          <Food src={food.src} />
-        </div>
-      ))}
+      { !encyclopediaOpened &&
+        <Box>
+          <Stats
+            health={health}
+            hunger={hunger}
+            thirst={thirst}
+            calories={calories}
+            totalConsumed={totalConsumed}
+          />
+          { health > 0 &&
+            <Box>
+              {foods.map((food) => (
+                <div
+                  key={food.id}
+                  onClick={() => consume(food.id, food.type)}
+                  style={{
+                    position: "absolute",
+                    top: food.top,
+                    left: food.left
+                  }}
+                >
+                  <Food src={food.src} />
+                </div>
+              ))}
+            </Box>
+          }
+          { health === 0 &&
+            <Stack position="relative" alignItems="center" top={170}>
+              <Typography color="error" fontSize={60} fontWeight="bold">YOU DIED!</Typography>
+              <Button variant="contained" color="warning">Try again?</Button>
+            </Stack>
+          }
+        </Box>
+      }
       { encyclopediaOpened &&
         <Encyclopedia />
       }
-      <Fab onClick={() => setEncyclopediaOpened(!encyclopediaOpened)} color="primary" sx={{ position: "fixed", bottom: 14, left: 14 }}>
+      <Fab
+        onClick={() => setEncyclopediaOpened(!encyclopediaOpened)}
+        color="primary"
+        sx={{
+          position: "fixed",
+          bottom: 14,
+          left: 14
+        }}
+      >
         { encyclopediaOpened &&
           <ArrowBack />
         }

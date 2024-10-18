@@ -1,8 +1,10 @@
-import { LinearProgress } from "@mui/material";
+import { Stack, Typography } from "@mui/material";
 // add thirst and hunger - rapdily descresws
 function Calories({ value }) {
   return (
-    <LinearProgress variant="determinate" value={value} />
+    <Stack>
+      <Typography>Calories: {value}</Typography>
+    </Stack>
   );
 }
 

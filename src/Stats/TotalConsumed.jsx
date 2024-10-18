@@ -1,10 +1,8 @@
-import { Box } from "@mui/material";
+import { Typography } from "@mui/material";
 
-function TotalConsumed() {
+function TotalConsumed({ value }) {
   return (
-    <Box>
-      
-    </Box>
+    <Typography>Total consumed: {value}</Typography>
   );
 }
 
