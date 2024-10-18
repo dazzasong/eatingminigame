@@ -2,8 +2,9 @@ import { Stack, Typography } from "@mui/material";
 // add thirst and hunger - rapdily descresws
 function Calories({ value }) {
   return (
-    <Stack>
-      <Typography>Calories: {value}</Typography>
+    <Stack direction="row">
+      <Typography>Calories:</Typography>
+      <Typography position="relative" left={59}>{value}</Typography>
     </Stack>
   );
 }

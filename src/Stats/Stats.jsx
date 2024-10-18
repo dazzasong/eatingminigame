@@ -7,7 +7,7 @@ import TotalConsumed from "./TotalConsumed";
 
 export default function Stats({ health, hunger, thirst, calories, totalConsumed }) {
   return (
-    <Stack direction="row" justifyContent="space-between">
+    <Stack direction="row" justifyContent="space-between" mx={1}>
       <Box>
         <HealthBar value={health} />
         <HungerBar value={hunger} />

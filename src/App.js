@@ -46,6 +46,14 @@ function App() {
   const [calories, setCalories] = useState(0);
   const [totalConsumed, setTotalConsumed] = useState(0);
 
+  const restart = () => {
+    setHealth(100);
+    setHunger(100);
+    setThirst(100);
+    setCalories(0);
+    setTotalConsumed(0);
+  };
+
   useEffect(() => {
     if (health > 0 && (hunger < 1 || thirst < 1)) {
       const interval = setInterval(() => {
@@ -137,7 +145,7 @@ function App() {
           throw new Error("Invalid randomSfx!");
       }
     }
-  }
+  };
 
   useEffect(() => {
     // Adds a random food every second
@@ -183,7 +191,7 @@ function App() {
           { health === 0 &&
             <Stack position="relative" alignItems="center" top={170}>
               <Typography color="error" fontSize={60} fontWeight="bold">YOU DIED!</Typography>
-              <Button variant="contained" color="warning">Try again?</Button>
+              <Button onClick={restart} variant="contained" color="warning">Try again?</Button>
             </Stack>
           }
         </Box>
