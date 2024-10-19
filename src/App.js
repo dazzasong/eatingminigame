@@ -6,7 +6,7 @@ import { ArrowBack, AutoStories } from "@mui/icons-material";
 import Stats from "./Stats/Stats";
 
 function App() {
-  const dead = new Audio("sfx/dead.mp3");
+  const dead = useRef(new Audio("sfx/dead.mp3"));
 
   const eat1 = useRef(new Audio("sfx/eat/eat1.mp3"));
   const eat2 = useRef(new Audio("sfx/eat/eat2.mp3"));
@@ -192,7 +192,7 @@ function App() {
             setThirst((prevThirst) => prevThirst + 25);
             break;
           default:
-            throw new Error("Invalid food!");
+            console.error("Invalid food!");
         }
         break;    
       case 1:
@@ -234,11 +234,11 @@ function App() {
             setThirst((prevThirst) => prevThirst + 60);
             break;
           default:
-            throw new Error("Invalid food!");
+            console.error("Invalid food!");
         }
         break;
       default:
-        throw new Error("Invalid type!");
+        console.error("Invalid type!");
     }
 
     const randomSfx = Math.floor(Math.random() * 3);
@@ -259,7 +259,7 @@ function App() {
             eat3.current.play().catch((error) => console.error("Audio play error:", error));
             break;
           default:
-            throw new Error("Invalid randomSfx!");
+            console.error("Invalid randomSfx!");
         }
         break;
       case 1:
@@ -277,11 +277,11 @@ function App() {
             drink3.current.play().catch((error) => console.error("Audio play error:", error));
             break;
           default:
-            throw new Error("Invalid randomSfx!");
+            console.error("Invalid randomSfx!");
         }
         break;
       default:
-        throw new Error("Invalid type!");
+        console.error("Invalid type!");
     }
   };
 

@@ -1,3 +1,5 @@
 NEXT: Add overeating feature
 
-BUGS TO FIX: none?
+PLANNED:
+
+BUGS TO FIX: change throw new error to console.error
