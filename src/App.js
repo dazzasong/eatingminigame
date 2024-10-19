@@ -47,11 +47,11 @@ function App() {
   const [thirst, setThirst] = useState(100);
   const [calories, setCalories] = useState(0);
   const [totalConsumed, setTotalConsumed] = useState(0);
-  const [timer, setTimer] = useState(0);
+  const [hours, setHours] = useState(0);
 
-  // Increments timer every half second (1 game minute)
+  // Increments hours every 3 quarters of a second (1 game hour)
   useEffect(() => {
-    const interval = setInterval(() => setTimer((prevTimer) => prevTimer + 1), 750);
+    const interval = setInterval(() => setHours((prevTimer) => prevTimer + 1), 750);
 
     if (health < 1) clearInterval(interval);
     return () => clearInterval(interval);
@@ -102,7 +102,7 @@ function App() {
     setThirst(100);
     setCalories(0);
     setTotalConsumed(0);
-    setTimer(0)
+    setHours(0)
   };
 
   const addRandomFood = () => {
@@ -279,7 +279,7 @@ function App() {
             thirst={thirst}
             calories={calories}
             totalConsumed={totalConsumed}
-            timer={timer}
+            hours={hours}
           />
           { health > 0 &&
             <Box>
