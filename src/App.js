@@ -45,6 +45,54 @@ function App() {
   const [thirst, setThirst] = useState(100);
   const [calories, setCalories] = useState(0);
   const [totalConsumed, setTotalConsumed] = useState(0);
+  const [timer, setTimer] = useState(0);
+
+  // Increments timer every second
+  useEffect(() => {
+    const interval = setInterval(() => setTimer((prevTimer) => prevTimer + 1), 1000);
+
+    if (health < 1) clearInterval(interval);
+    return () => clearInterval(interval);
+  // eslint-disable-next-line
+  }, [health < 1]);
+
+  // Updates health to increment or decrement depending on conditions
+  useEffect(() => {
+    const interval = setInterval(() => setHealth((prevHealth) => hunger > 0 && thirst > 0 ? prevHealth + 1 : prevHealth - 10), 1000);
+    
+    if (health > 100) setHealth(100)
+
+    if (health < 1) clearInterval(interval);
+    return () => clearInterval(interval);
+  // eslint-disable-next-line
+  }, [health]);
+
+  // Decrements hunger by 2 every second
+  useEffect(() => {
+    const interval = setInterval(() => setHunger((prevHunger) => prevHunger - 2), 1000);
+
+    if (hunger < 1 || health < 1) clearInterval(interval);
+    return () => clearInterval(interval);
+  // eslint-disable-next-line
+  }, [hunger < 1 || health < 1]);
+
+  // Decrements thirst by 2 every second
+  useEffect(() => {
+    const interval = setInterval(() => setThirst((prevThirst) => prevThirst - 2), 1000);
+
+    if (thirst < 1 || health < 1) clearInterval(interval);
+    return () => clearInterval(interval);
+  // eslint-disable-next-line
+  }, [hunger < 1 || health < 1]);
+
+  // Adds food every 2 seconds
+  useEffect(() => {
+    const interval = setInterval(() => addRandomFood(), 2000);
+
+    if (health < 1) clearInterval(interval);
+    return () => clearInterval(interval);
+  // eslint-disable-next-line
+  }, [health < 1]);
 
   const restart = () => {
     setHealth(100);
@@ -52,39 +100,8 @@ function App() {
     setThirst(100);
     setCalories(0);
     setTotalConsumed(0);
+    setTimer(0)
   };
-
-  useEffect(() => {
-    if (health > 0 && (hunger < 1 || thirst < 1)) {
-      const interval = setInterval(() => {
-        setHealth((prevHealth) => prevHealth - 5);
-      }, 1000);
-
-      return () => clearInterval(interval);
-    }
-
-  });
-
-  useEffect(() => {
-    if (hunger > 0) {
-      const interval = setInterval(() => {
-        setHunger(hunger-2);
-      }, 1000);
-
-      return () => clearInterval(interval);
-    }
-
-  });
-
-  useEffect(() => {
-    if (thirst > 0) {
-      const interval = setInterval(() => {
-        setThirst(thirst-2);
-      }, 1000);
-  
-      return () => clearInterval(interval);
-    }
-  });
 
   const addRandomFood = () => {
     const id = Math.random().toString(36).slice(2, 11);
@@ -101,10 +118,8 @@ function App() {
 
     setFoods((prevFood) => [...prevFood, newFood]);
 
-    // Remove food after 1 second
-    setTimeout(() => {
-      setFoods((prevFood) => prevFood.filter((food) => food.id !== id));
-    }, 1000);
+    // Removes this after 2 seconds
+    setTimeout(() => setFoods((prevFood) => prevFood.filter((food) => food.id !== id)), 2000);
   };
 
   const consume = (id, src, type) => {
@@ -216,15 +231,6 @@ function App() {
     }
   };
 
-  useEffect(() => {
-    // Adds a random food every second
-    const interval = setInterval(() => {
-      addRandomFood();
-    }, 1000);
-
-    return () => clearInterval(interval);
-  });
-
   return (
     <Box>
       { !encyclopediaOpened &&
@@ -235,6 +241,7 @@ function App() {
             thirst={thirst}
             calories={calories}
             totalConsumed={totalConsumed}
+            timer={timer}
           />
           { health > 0 &&
             <Box>
@@ -253,7 +260,7 @@ function App() {
               ))}
             </Box>
           }
-          { health === 0 &&
+          { health < 1 &&
             <Stack position="relative" alignItems="center" top={170}>
               <Typography color="error" fontSize={60} fontWeight="bold">YOU DIED!</Typography>
               <Button onClick={restart} variant="contained" color="warning">Try again?</Button>
