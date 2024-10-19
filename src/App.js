@@ -6,6 +6,8 @@ import { ArrowBack, AutoStories } from "@mui/icons-material";
 import Stats from "./Stats/Stats";
 
 function App() {
+  const dead = new Audio("sfx/dead.mp3");
+
   const eat1 = useRef(new Audio("sfx/eat/eat1.mp3"));
   const eat2 = useRef(new Audio("sfx/eat/eat2.mp3"));
   const eat3 = useRef(new Audio("sfx/eat/eat3.mp3"));
@@ -22,7 +24,8 @@ function App() {
       "img/food/hotdog.png",
       "img/food/ice-cream.png",
       "img/food/waffle.png",
-      "img/food/chips.png"
+      "img/food/chips.png",
+      "img/food/salad.png"
     ],
     [ // Drinks
       "img/drink/water.png",
@@ -36,7 +39,7 @@ function App() {
     ]
   ];
 
-  const healthyFoods = ["apple", "banana", "water", "milk", "lemonade", "fresh orange juice"];
+  const healthyFoods = ["apple", "banana", "salad", "water", "milk", "lemonade", "fresh orange juice"];
 
   const [encyclopediaOpened, setEncyclopediaOpened] = useState(false);
 
@@ -49,14 +52,18 @@ function App() {
   const [totalConsumed, setTotalConsumed] = useState(0);
   const [hours, setHours] = useState(0);
 
+  let isDead = health <= 0;
+
+  if (isDead) dead.play().catch((error) => console.error("Audio play error:", error));
+
   // Increments hours every 3 quarters of a second (1 game hour)
   useEffect(() => {
     const interval = setInterval(() => setHours((prevTimer) => prevTimer + 1), 750);
 
-    if (health < 1) clearInterval(interval);
+    if (isDead) clearInterval(interval);
     return () => clearInterval(interval);
   // eslint-disable-next-line
-  }, [health < 1]);
+  }, [isDead]);
 
   // Updates health to increment if nourished or decrement if malnourished
   useEffect(() => {
@@ -64,37 +71,41 @@ function App() {
     
     if (health > 100) setHealth(100);
 
-    if (health < 1) clearInterval(interval);
+    if (isDead) clearInterval(interval);
     return () => clearInterval(interval);
   // eslint-disable-next-line
-  }, [health]);
+  }, [hunger > 0 && thirst > 0, isDead, health > 100]);
 
   // Decrements hunger by 2 every second
   useEffect(() => {
     const interval = setInterval(() => setHunger((prevHunger) => prevHunger - 2), 1000);
 
-    if (hunger < 1 || health < 1) clearInterval(interval);
+    if (hunger > 100) setHunger(100);
+
+    if (hunger < 1 || isDead) clearInterval(interval);
     return () => clearInterval(interval);
   // eslint-disable-next-line
-  }, [hunger < 1 || health < 1]);
+  }, [hunger < 1 || isDead, hunger > 100]);
 
   // Decrements thirst by 2 every second
   useEffect(() => {
     const interval = setInterval(() => setThirst((prevThirst) => prevThirst - 2), 1000);
 
-    if (thirst < 1 || health < 1) clearInterval(interval);
+    if (thirst > 100) setThirst(100);
+
+    if (thirst < 1 || isDead) clearInterval(interval);
     return () => clearInterval(interval);
   // eslint-disable-next-line
-  }, [hunger < 1 || health < 1]);
+  }, [thirst < 1 || isDead, thirst > 100]);
 
   // Adds food every 2 seconds
   useEffect(() => {
     const interval = setInterval(() => addRandomFood(), 2000);
 
-    if (health < 1) clearInterval(interval);
+    if (isDead) clearInterval(interval);
     return () => clearInterval(interval);
   // eslint-disable-next-line
-  }, [health < 1]);
+  }, [isDead]);
 
   const restart = () => {
     setHealth(100);
@@ -130,50 +141,55 @@ function App() {
 
     let food = src.split("/").pop().split(".")[0].replace(/-/g, " ");
 
-    if (healthyFoods.includes(food)) setHealth((prevHealth) => prevHealth + 5);
-    else setHealth((prevHealth) => prevHealth - 5);
+    if (healthyFoods.includes(food)) setHealth((prevHealth) => prevHealth + 10);
+    else setHealth((prevHealth) => prevHealth - 10);
 
     switch (type) {
       case 0:
         switch (food) {
           case "apple":
             setCalories((prevCalories) => prevCalories + 95);
-            setHunger((prevHunger) => prevHunger + 2);
-            setThirst((prevThirst) => prevThirst + 1);
+            setHunger((prevHunger) => prevHunger + 20);
+            setThirst((prevThirst) => prevThirst + 10);
             break;
           case "banana":
             setCalories((prevCalories) => prevCalories + 105);
-            setHunger((prevHunger) => prevHunger + 2);
+            setHunger((prevHunger) => prevHunger + 20);
             break;
           case "burger":
             setCalories((prevCalories) => prevCalories + 254);
-            setHunger((prevHunger) => prevHunger + 6);
-            setThirst((prevThirst) => prevThirst - 2);
+            setHunger((prevHunger) => prevHunger + 60);
+            setThirst((prevThirst) => prevThirst - 20);
             break;
           case "chips":
             setCalories((prevCalories) => prevCalories + 240);
-            setHunger((prevHunger) => prevHunger + 3);
-            setThirst((prevThirst) => prevThirst - 3);
+            setHunger((prevHunger) => prevHunger + 30);
+            setThirst((prevThirst) => prevThirst - 30);
             break;
           case "fries":
             setCalories((prevCalories) => prevCalories + 378);
-            setHunger((prevHunger) => prevHunger + 4);
-            setThirst((prevThirst) => prevThirst - 3);
+            setHunger((prevHunger) => prevHunger + 40);
+            setThirst((prevThirst) => prevThirst - 30);
             break;
           case "hotdog":
             setCalories((prevCalories) => prevCalories + 151);
-            setHunger((prevHunger) => prevHunger + 6);
-            setThirst((prevThirst) => prevThirst - 2);
+            setHunger((prevHunger) => prevHunger + 60);
+            setThirst((prevThirst) => prevThirst - 20);
             break;
           case "ice cream":
             setCalories((prevCalories) => prevCalories + 137);
-            setHunger((prevHunger) => prevHunger + 4);
-            setThirst((prevThirst) => prevThirst + 2);
+            setHunger((prevHunger) => prevHunger + 40);
+            setThirst((prevThirst) => prevThirst + 20);
             break;
           case "waffle":
             setCalories((prevCalories) => prevCalories + 218);
-            setHunger((prevHunger) => prevHunger + 4);
-            setThirst((prevThirst) => prevThirst - 2);
+            setHunger((prevHunger) => prevHunger + 40);
+            setThirst((prevThirst) => prevThirst - 20);
+            break;
+          case "salad":
+            setCalories((prevCalories) => prevCalories + 187);
+            setHunger((prevHunger) => prevHunger + 50);
+            setThirst((prevThirst) => prevThirst + 25);
             break;
           default:
             throw new Error("Invalid food!");
@@ -182,40 +198,40 @@ function App() {
       case 1:
         switch (food) {
           case "water":
-            setThirst((prevThirst) => prevThirst + 8);
+            setThirst((prevThirst) => prevThirst + 80);
             break;
           case "milk":
             setCalories((prevCalories) => prevCalories + 148);
-            setHunger((prevHunger) => prevHunger + 1);
-            setThirst((prevThirst) => prevThirst + 7.5);
+            setHunger((prevHunger) => prevHunger + 10);
+            setThirst((prevThirst) => prevThirst + 75);
             break;
           case "lemonade":
             setCalories((prevCalories) => prevCalories + 99);
-            setThirst((prevThirst) => prevThirst + 7);
+            setThirst((prevThirst) => prevThirst + 70);
             break;
           case "fresh orange juice":
             setCalories((prevCalories) => prevCalories + 111);
-            setHunger((prevHunger) => prevHunger + 0.5);
-            setThirst((prevThirst) => prevThirst + 6);
+            setHunger((prevHunger) => prevHunger + 5);
+            setThirst((prevThirst) => prevThirst + 60);
             break;
           case "apple juice":
             setCalories((prevCalories) => prevCalories + 113);
-            setHunger((prevHunger) => prevHunger + 0.5);
-            setThirst((prevThirst) => prevThirst + 6);
+            setHunger((prevHunger) => prevHunger + 5);
+            setThirst((prevThirst) => prevThirst + 60);
             break;
           case "coke":
             setCalories((prevCalories) => prevCalories + 161);
-            setHunger((prevHunger) => prevHunger + 0.5);
-            setThirst((prevThirst) => prevThirst + 5);
+            setHunger((prevHunger) => prevHunger + 5);
+            setThirst((prevThirst) => prevThirst + 50);
             break;
           case "fanta":
             setCalories((prevCalories) => prevCalories + 174);
-            setHunger((prevHunger) => prevHunger + 0.5);
-            setThirst((prevThirst) => prevThirst + 5);
+            setHunger((prevHunger) => prevHunger + 5);
+            setThirst((prevThirst) => prevThirst + 50);
             break;
           case "coffee":
-            setHunger((prevHunger) => prevHunger + 0.5);
-            setThirst((prevThirst) => prevThirst + 6);
+            setHunger((prevHunger) => prevHunger + 5);
+            setThirst((prevThirst) => prevThirst + 60);
             break;
           default:
             throw new Error("Invalid food!");

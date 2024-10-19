@@ -42,8 +42,8 @@ export default function Encyclopedia() {
       description: "A sweet and juicy fruit. Has skin rich in vitamins. Contains hard seeds in the core.",
       stats: {
         calories: 95,
-        hunger: 2,
-        thirst: 1
+        hunger: 20,
+        thirst: 10
       }
     },
     {
@@ -53,7 +53,7 @@ export default function Encyclopedia() {
       description: "A fruit. The skin cannot be consumed. Rich in potassium.",
       stats: {
         calories: 105,
-        hunger: 2,
+        hunger: 20,
         thirst: 0
       }
     },
@@ -64,8 +64,8 @@ export default function Encyclopedia() {
       description: "A grilled patty between two buns. Can contain veggies, cheese, sauces and other meats.",
       stats: {
         calories: 254,
-        hunger: 6,
-        thirst: -2
+        hunger: 60,
+        thirst: -20
       }
     },
     {
@@ -75,8 +75,8 @@ export default function Encyclopedia() {
       description: "Thinly sliced potatoes deep-fried in oil. Salt and other flavorings are added.",
       stats: {
         calories: 240,
-        hunger: 3,
-        thirst: -3
+        hunger: 30,
+        thirst: -30
       }
     },
     {
@@ -86,8 +86,8 @@ export default function Encyclopedia() {
       description: "Rectangular-cut potatoes deep-fried in oil. Salt is added.",
       stats: {
         calories: 378,
-        hunger: 4,
-        thirst: -3
+        hunger: 40,
+        thirst: -30
       }
     },
     {
@@ -97,8 +97,8 @@ export default function Encyclopedia() {
       description: "A grilled sausage placed between two buns. Sauce and other toppings are added.",
       stats: {
         calories: 151,
-        hunger: 6,
-        thirst: -2
+        hunger: 60,
+        thirst: -20
       }
     },
     {
@@ -108,8 +108,8 @@ export default function Encyclopedia() {
       description: "Cream and other flavorings chilled to ice. Can be topped with sprinkles. High in sugar.",
       stats: {
         calories: 137,
-        hunger: 4,
-        thirst: 2
+        hunger: 40,
+        thirst: 20
       }
     },
     {
@@ -119,8 +119,19 @@ export default function Encyclopedia() {
       description: "Batter in the form of a circle with a pattern. Syrup is poured onto it.",
       stats: {
         calories: 218,
-        hunger: 4,
-        thirst: -2
+        hunger: 40,
+        thirst: -20
+      }
+    },
+    {
+      subject: "Salad",
+      src: "img/food/salad.png",
+      healthy: true,
+      description: "A plate of vegetables and fruit with dressings added.",
+      stats: {
+        calories: 187,
+        hunger: 50,
+        thirst: 25
       }
     }
   ];
@@ -134,7 +145,7 @@ export default function Encyclopedia() {
       stats: {
         calories: 0,
         hunger: 0,
-        thirst: 8
+        thirst: 80
       }
     },
     {
@@ -144,8 +155,8 @@ export default function Encyclopedia() {
       description: "Fresh whole milk from the cow. Rich in calcium.",
       stats: {
         calories: 148,
-        hunger: 1,
-        thirst: 7.5
+        hunger: 10,
+        thirst: 75
       }
     },
     {
@@ -156,7 +167,7 @@ export default function Encyclopedia() {
       stats: {
         calories: 99,
         hunger: 0,
-        thirst: 7
+        thirst: 70
       }
     },
     {
@@ -166,8 +177,8 @@ export default function Encyclopedia() {
       description: "Freshly squeezed orange juice. High in vitamin C.",
       stats: {
         calories: 111,
-        hunger: 0.5,
-        thirst: 6
+        hunger: 5,
+        thirst: 60
       }
     },
     {
@@ -177,8 +188,8 @@ export default function Encyclopedia() {
       description: "Fresh bottled apple juice. High in sugar. Preservatives are added.",
       stats: {
         calories: 113,
-        hunger: 0.5,
-        thirst: 6
+        hunger: 5,
+        thirst: 60
       }
     },
     {
@@ -188,8 +199,8 @@ export default function Encyclopedia() {
       description: "A can of Coke. Carbonated.",
       stats: {
         calories: 161,
-        hunger: 0.5,
-        thirst: 5
+        hunger: 5,
+        thirst: 50
       }
     },
     {
@@ -199,8 +210,8 @@ export default function Encyclopedia() {
       description: "A can of Fanta. Carbonated and orange-flavored.",
       stats: {
         calories: 174,
-        hunger: 0.5,
-        thirst: 5
+        hunger: 5,
+        thirst: 50
       }
     },
     {
@@ -210,8 +221,8 @@ export default function Encyclopedia() {
       description: "Various different types. Provides high energy with negative side effects.",
       stats: {
         calories: 0,
-        hunger: 0.5,
-        thirst: 6
+        hunger: 5,
+        thirst: 60
       }
     }
   ];
