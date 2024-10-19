@@ -75,7 +75,7 @@ export default function Encyclopedia() {
       description: "Thinly sliced potatoes deep-fried in oil. Salt and other flavorings are added.",
       stats: {
         calories: 240,
-        hunger: 4,
+        hunger: 3,
         thirst: -3
       }
     },
@@ -166,7 +166,7 @@ export default function Encyclopedia() {
       description: "Freshly squeezed orange juice. High in vitamin C.",
       stats: {
         calories: 111,
-        hunger: 0,
+        hunger: 0.5,
         thirst: 6
       }
     },
@@ -177,7 +177,7 @@ export default function Encyclopedia() {
       description: "Fresh bottled apple juice. High in sugar. Preservatives are added.",
       stats: {
         calories: 113,
-        hunger: 0,
+        hunger: 0.5,
         thirst: 6
       }
     },
@@ -188,7 +188,7 @@ export default function Encyclopedia() {
       description: "A can of Coke. Carbonated.",
       stats: {
         calories: 161,
-        hunger: 0,
+        hunger: 0.5,
         thirst: 5
       }
     },
@@ -199,7 +199,7 @@ export default function Encyclopedia() {
       description: "A can of Fanta. Carbonated and orange-flavored.",
       stats: {
         calories: 174,
-        hunger: 0,
+        hunger: 0.5,
         thirst: 5
       }
     },
@@ -211,7 +211,7 @@ export default function Encyclopedia() {
       stats: {
         calories: 0,
         hunger: 0.5,
-        thirst: 4
+        thirst: 6
       }
     }
   ];

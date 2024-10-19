@@ -57,7 +57,7 @@ function App() {
   useEffect(() => {
     if (health > 0 && (hunger < 1 || thirst < 1)) {
       const interval = setInterval(() => {
-        setHealth(health-5);
+        setHealth((prevHealth) => prevHealth - 5);
       }, 1000);
 
       return () => clearInterval(interval);
@@ -107,9 +107,78 @@ function App() {
     }, 1000);
   };
 
-  const consume = (id, type) => {
+  const consume = (id, src, type) => {
     setFoods((prevFood) => prevFood.filter((food) => food.id !== id));
+    setTotalConsumed((prevTotalConsumed) => prevTotalConsumed + 1);
+
+    let food = src.split("/").pop().split(".")[0];
+
+    if (type === 0) {
+      if (food === "apple") {
+        setCalories((prevCalories) => prevCalories + 95);
+        setHunger((prevHunger) => prevHunger + 2);
+        setThirst((prevThirst) => prevThirst + 1);
+      } else if (food === "banana") {
+        setCalories((prevCalories) => prevCalories + 105)
+        setHunger((prevHunger) => prevHunger + 2);
+      } else if (food === "burger") {
+        setCalories((prevCalories) => prevCalories + 254);
+        setHunger((prevHunger) => prevHunger + 6);
+        setThirst((prevThirst) => prevThirst - 2);
+      } else if (food === "chips") {
+        setCalories((prevCalories) => prevCalories + 240);
+        setHunger((prevHunger) => prevHunger + 3);
+        setThirst((prevThirst) => prevThirst - 3);
+      } else if (food === "fries") {
+        setCalories((prevCalories) => prevCalories + 378);
+        setHunger((prevHunger) => prevHunger + 4);
+        setThirst((prevThirst) => prevThirst - 3);
+      } else if (food === "hotdog") {
+        setCalories((prevCalories) => prevCalories + 151);
+        setHunger((prevHunger) => prevHunger + 6);
+        setThirst((prevThirst) => prevThirst - 2);
+      } else if (food === "ice-cream") {
+        setCalories((prevCalories) => prevCalories + 137);
+        setHunger((prevHunger) => prevHunger + 4);
+        setThirst((prevThirst) => prevThirst + 2);
+      } else if (food === "waffle") {
+        setCalories((prevCalories) => prevCalories + 218);
+        setHunger((prevHunger) => prevHunger + 4);
+        setThirst((prevThirst) => prevThirst - 2);
+      }
+    } else {
+      if (food === "water") setThirst((prevThirst) => prevThirst + 8);
+      else if (food === "milk") {
+        setCalories((prevCalories) => prevCalories + 148);
+        setHunger((prevHunger) => prevHunger + 1);
+        setThirst((prevThirst) => prevThirst + 7.5);
+      } else if (food === "lemonade") {
+        setCalories((prevCalories) => prevCalories + 99);
+        setThirst((prevThirst) => prevThirst + 7);
+      } else if (food === "fresh-orange-juice") {
+        setCalories((prevCalories) => prevCalories + 111);
+        setHunger((prevHunger) => prevHunger + 0.5);
+        setThirst((prevThirst) => prevThirst + 6);
+      } else if (food === "apple-juice") {
+        setCalories((prevCalories) => prevCalories + 113);
+        setHunger((prevHunger) => prevHunger + 0.5);
+        setThirst((prevThirst) => prevThirst + 6);
+      } else if (food === "coke") {
+        setCalories((prevCalories) => prevCalories + 161);
+        setHunger((prevHunger) => prevHunger + 0.5);
+        setThirst((prevThirst) => prevThirst + 5);
+      } else if (food === "fanta") {
+        setCalories((prevCalories) => prevCalories + 174);
+        setHunger((prevHunger) => prevHunger + 0.5);
+        setThirst((prevThirst) => prevThirst + 5);
+      } else if (food === "coffee") {
+        setHunger((prevHunger) => prevHunger + 0.5);
+        setThirst((prevThirst) => prevThirst + 6);
+      }
+    }
+
     const randomSfx = Math.floor(Math.random() * 3);
+
     if (type === 0) {
       switch (randomSfx) {
         case 0:
@@ -172,7 +241,7 @@ function App() {
               {foods.map((food) => (
                 <div
                   key={food.id}
-                  onClick={() => consume(food.id, food.type)}
+                  onClick={() => consume(food.id, food.src, food.type)}
                   style={{
                     position: "absolute",
                     top: food.top,
