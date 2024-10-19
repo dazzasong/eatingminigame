@@ -4,6 +4,7 @@ import Calories from "./Calories";
 import HungerBar from "./HungerBar";
 import ThirstBar from "./ThirstBar";
 import TotalConsumed from "./TotalConsumed";
+import Timer from "./Timer";
 
 export default function Stats({ health, hunger, thirst, calories, totalConsumed, timer }) {
   return (
@@ -14,7 +15,7 @@ export default function Stats({ health, hunger, thirst, calories, totalConsumed,
         <ThirstBar value={thirst} />
       </Box>
       <Box>
-        <Typography>{timer}</Typography>
+        <Timer value={timer} />
       </Box>
       <Box width={160}>
         <Calories value={calories} />

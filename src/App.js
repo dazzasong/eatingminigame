@@ -36,6 +36,8 @@ function App() {
     ]
   ];
 
+  const healthyFoods = ["apple", "banana", "water", "milk", "lemonade", "fresh orange juice"];
+
   const [encyclopediaOpened, setEncyclopediaOpened] = useState(false);
 
   const [foods, setFoods] = useState([]);
@@ -47,16 +49,16 @@ function App() {
   const [totalConsumed, setTotalConsumed] = useState(0);
   const [timer, setTimer] = useState(0);
 
-  // Increments timer every second
+  // Increments timer every half second (1 game minute)
   useEffect(() => {
-    const interval = setInterval(() => setTimer((prevTimer) => prevTimer + 1), 1000);
+    const interval = setInterval(() => setTimer((prevTimer) => prevTimer + 1), 750);
 
     if (health < 1) clearInterval(interval);
     return () => clearInterval(interval);
   // eslint-disable-next-line
   }, [health < 1]);
 
-  // Updates health to increment or decrement depending on conditions
+  // Updates health to increment if nourished or decrement if malnourished
   useEffect(() => {
     const interval = setInterval(() => setHealth((prevHealth) => hunger > 0 && thirst > 0 ? prevHealth + 1 : prevHealth - 10), 1000);
     
@@ -126,7 +128,10 @@ function App() {
     setFoods((prevFood) => prevFood.filter((food) => food.id !== id));
     setTotalConsumed((prevTotalConsumed) => prevTotalConsumed + 1);
 
-    let food = src.split("/").pop().split(".")[0];
+    let food = src.split("/").pop().split(".")[0].replace(/-/g, " ");
+
+    if (healthyFoods.includes(food)) setHealth((prevHealth) => prevHealth + 5);
+    else setHealth((prevHealth) => prevHealth - 5);
 
     switch (type) {
       case 0:
@@ -160,7 +165,7 @@ function App() {
             setHunger((prevHunger) => prevHunger + 6);
             setThirst((prevThirst) => prevThirst - 2);
             break;
-          case "ice-cream":
+          case "ice cream":
             setCalories((prevCalories) => prevCalories + 137);
             setHunger((prevHunger) => prevHunger + 4);
             setThirst((prevThirst) => prevThirst + 2);
@@ -188,12 +193,12 @@ function App() {
             setCalories((prevCalories) => prevCalories + 99);
             setThirst((prevThirst) => prevThirst + 7);
             break;
-          case "fresh-orange-juice":
+          case "fresh orange juice":
             setCalories((prevCalories) => prevCalories + 111);
             setHunger((prevHunger) => prevHunger + 0.5);
             setThirst((prevThirst) => prevThirst + 6);
             break;
-          case "apple-juice":
+          case "apple juice":
             setCalories((prevCalories) => prevCalories + 113);
             setHunger((prevHunger) => prevHunger + 0.5);
             setThirst((prevThirst) => prevThirst + 6);
