@@ -60,7 +60,7 @@ function App() {
   useEffect(() => {
     const interval = setInterval(() => setHealth((prevHealth) => hunger > 0 && thirst > 0 ? prevHealth + 1 : prevHealth - 10), 1000);
     
-    if (health > 100) setHealth(100)
+    if (health > 100) setHealth(100);
 
     if (health < 1) clearInterval(interval);
     return () => clearInterval(interval);
@@ -128,68 +128,96 @@ function App() {
 
     let food = src.split("/").pop().split(".")[0];
 
-    if (type === 0) {
-      if (food === "apple") {
-        setCalories((prevCalories) => prevCalories + 95);
-        setHunger((prevHunger) => prevHunger + 2);
-        setThirst((prevThirst) => prevThirst + 1);
-      } else if (food === "banana") {
-        setCalories((prevCalories) => prevCalories + 105)
-        setHunger((prevHunger) => prevHunger + 2);
-      } else if (food === "burger") {
-        setCalories((prevCalories) => prevCalories + 254);
-        setHunger((prevHunger) => prevHunger + 6);
-        setThirst((prevThirst) => prevThirst - 2);
-      } else if (food === "chips") {
-        setCalories((prevCalories) => prevCalories + 240);
-        setHunger((prevHunger) => prevHunger + 3);
-        setThirst((prevThirst) => prevThirst - 3);
-      } else if (food === "fries") {
-        setCalories((prevCalories) => prevCalories + 378);
-        setHunger((prevHunger) => prevHunger + 4);
-        setThirst((prevThirst) => prevThirst - 3);
-      } else if (food === "hotdog") {
-        setCalories((prevCalories) => prevCalories + 151);
-        setHunger((prevHunger) => prevHunger + 6);
-        setThirst((prevThirst) => prevThirst - 2);
-      } else if (food === "ice-cream") {
-        setCalories((prevCalories) => prevCalories + 137);
-        setHunger((prevHunger) => prevHunger + 4);
-        setThirst((prevThirst) => prevThirst + 2);
-      } else if (food === "waffle") {
-        setCalories((prevCalories) => prevCalories + 218);
-        setHunger((prevHunger) => prevHunger + 4);
-        setThirst((prevThirst) => prevThirst - 2);
-      }
-    } else {
-      if (food === "water") setThirst((prevThirst) => prevThirst + 8);
-      else if (food === "milk") {
-        setCalories((prevCalories) => prevCalories + 148);
-        setHunger((prevHunger) => prevHunger + 1);
-        setThirst((prevThirst) => prevThirst + 7.5);
-      } else if (food === "lemonade") {
-        setCalories((prevCalories) => prevCalories + 99);
-        setThirst((prevThirst) => prevThirst + 7);
-      } else if (food === "fresh-orange-juice") {
-        setCalories((prevCalories) => prevCalories + 111);
-        setHunger((prevHunger) => prevHunger + 0.5);
-        setThirst((prevThirst) => prevThirst + 6);
-      } else if (food === "apple-juice") {
-        setCalories((prevCalories) => prevCalories + 113);
-        setHunger((prevHunger) => prevHunger + 0.5);
-        setThirst((prevThirst) => prevThirst + 6);
-      } else if (food === "coke") {
-        setCalories((prevCalories) => prevCalories + 161);
-        setHunger((prevHunger) => prevHunger + 0.5);
-        setThirst((prevThirst) => prevThirst + 5);
-      } else if (food === "fanta") {
-        setCalories((prevCalories) => prevCalories + 174);
-        setHunger((prevHunger) => prevHunger + 0.5);
-        setThirst((prevThirst) => prevThirst + 5);
-      } else if (food === "coffee") {
-        setHunger((prevHunger) => prevHunger + 0.5);
-        setThirst((prevThirst) => prevThirst + 6);
-      }
+    switch (type) {
+      case 0:
+        switch (food) {
+          case "apple":
+            setCalories((prevCalories) => prevCalories + 95);
+            setHunger((prevHunger) => prevHunger + 2);
+            setThirst((prevThirst) => prevThirst + 1);
+            break;
+          case "banana":
+            setCalories((prevCalories) => prevCalories + 105);
+            setHunger((prevHunger) => prevHunger + 2);
+            break;
+          case "burger":
+            setCalories((prevCalories) => prevCalories + 254);
+            setHunger((prevHunger) => prevHunger + 6);
+            setThirst((prevThirst) => prevThirst - 2);
+            break;
+          case "chips":
+            setCalories((prevCalories) => prevCalories + 240);
+            setHunger((prevHunger) => prevHunger + 3);
+            setThirst((prevThirst) => prevThirst - 3);
+            break;
+          case "fries":
+            setCalories((prevCalories) => prevCalories + 378);
+            setHunger((prevHunger) => prevHunger + 4);
+            setThirst((prevThirst) => prevThirst - 3);
+            break;
+          case "hotdog":
+            setCalories((prevCalories) => prevCalories + 151);
+            setHunger((prevHunger) => prevHunger + 6);
+            setThirst((prevThirst) => prevThirst - 2);
+            break;
+          case "ice-cream":
+            setCalories((prevCalories) => prevCalories + 137);
+            setHunger((prevHunger) => prevHunger + 4);
+            setThirst((prevThirst) => prevThirst + 2);
+            break;
+          case "waffle":
+            setCalories((prevCalories) => prevCalories + 218);
+            setHunger((prevHunger) => prevHunger + 4);
+            setThirst((prevThirst) => prevThirst - 2);
+            break;
+          default:
+            throw new Error("Invalid food!");
+        }
+        break;    
+      case 1:
+        switch (food) {
+          case "water":
+            setThirst((prevThirst) => prevThirst + 8);
+            break;
+          case "milk":
+            setCalories((prevCalories) => prevCalories + 148);
+            setHunger((prevHunger) => prevHunger + 1);
+            setThirst((prevThirst) => prevThirst + 7.5);
+            break;
+          case "lemonade":
+            setCalories((prevCalories) => prevCalories + 99);
+            setThirst((prevThirst) => prevThirst + 7);
+            break;
+          case "fresh-orange-juice":
+            setCalories((prevCalories) => prevCalories + 111);
+            setHunger((prevHunger) => prevHunger + 0.5);
+            setThirst((prevThirst) => prevThirst + 6);
+            break;
+          case "apple-juice":
+            setCalories((prevCalories) => prevCalories + 113);
+            setHunger((prevHunger) => prevHunger + 0.5);
+            setThirst((prevThirst) => prevThirst + 6);
+            break;
+          case "coke":
+            setCalories((prevCalories) => prevCalories + 161);
+            setHunger((prevHunger) => prevHunger + 0.5);
+            setThirst((prevThirst) => prevThirst + 5);
+            break;
+          case "fanta":
+            setCalories((prevCalories) => prevCalories + 174);
+            setHunger((prevHunger) => prevHunger + 0.5);
+            setThirst((prevThirst) => prevThirst + 5);
+            break;
+          case "coffee":
+            setHunger((prevHunger) => prevHunger + 0.5);
+            setThirst((prevThirst) => prevThirst + 6);
+            break;
+          default:
+            throw new Error("Invalid drink!");
+        }
+        break;
+      default:
+        throw new Error("Invalid type!");
     }
 
     const randomSfx = Math.floor(Math.random() * 3);
