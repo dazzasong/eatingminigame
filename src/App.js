@@ -157,11 +157,7 @@ function App() {
   });
 
   return (
-    <Box
-      position="relative"
-      width="100vw"
-      height="100vh"
-    >
+    <Box>
       { !encyclopediaOpened &&
         <Box>
           <Stats
