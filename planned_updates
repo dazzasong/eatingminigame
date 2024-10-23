@@ -5,4 +5,4 @@ PLANNED: BPM that effects if your health is regenerating, more sfx, more food
 BUGS TO FIX:
 
 - when dead, death sound effect still plays when opening or closing encyclopedia
-- on restart, overeating effect text appears
+- variable type in addRandomFood does not change when requestMeds is true

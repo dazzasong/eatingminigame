@@ -2,7 +2,7 @@ import Encyclopedia from "./Encyclopedia";
 import Food from "./Food";
 import { useEffect, useRef, useState } from "react";
 import { Box, Button, Fab, Stack, Typography } from "@mui/material";
-import { ArrowBack, AutoStories } from "@mui/icons-material";
+import { ArrowBack, AutoStories, Medication } from "@mui/icons-material";
 import Stats from "./Stats/Stats";
 
 function App() {
@@ -36,6 +36,11 @@ function App() {
       "img/drink/coke.png",
       "img/drink/fanta.png",
       "img/drink/coffee.png"
+    ],
+    [ // Medicines
+      "img/medicine/stomach-medicine.png",
+      "img/medicine/painkiller.png",
+      "img/medicine/pills.png"
     ]
   ];
 
@@ -55,10 +60,11 @@ function App() {
   const [totalConsumed, setTotalConsumed] = useState(0);
   const [hours, setHours] = useState(0);
 
+  const [requestedMeds, setRequestedMeds] = useState(false);
+
   let isDead = health <= 0;
 
   if (isDead) death.current.play().catch((error) => console.error("Audio play error:", error));
-
 
   // Increments hours every 3 quarters of a second (1 game hour)
   useEffect(() => {
@@ -129,11 +135,12 @@ function App() {
     setCalories(0);
     setTotalConsumed(0);
     setHours(0);
+    setRequestedMeds(false);
   };
 
   const addRandomFood = () => {
     const id = Math.random().toString(36).slice(2, 11);
-    const type = Math.floor(Math.random() * 2);
+    const type = requestedMeds ? 2 : Math.floor(Math.random() * 2);
     const randSrc = Math.floor(Math.random() * srcs[type].length);
 
     const newFood = {
@@ -340,6 +347,15 @@ function App() {
               ))}
             </Box>
           }
+          <Button
+            onClick={() => setRequestedMeds(true)}
+            variant="contained"
+            color="success"
+            size="small"
+            startIcon={<Medication />}
+          >
+            <b>REQUEST MEDS</b>
+          </Button>
           { health < 1 &&
             <Stack position="relative" alignItems="center" top={170}>
               <Typography color="error" fontSize={60} fontWeight="bold">YOU DIED!</Typography>
