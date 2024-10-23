@@ -12,7 +12,9 @@ function App() {
   const drink1 = useRef(new Audio("sfx/drink/drink1.mp3"));
   const drink2 = useRef(new Audio("sfx/drink/drink2.mp3"));
   const drink3 = useRef(new Audio("sfx/drink/drink3.mp3"));
-  const swallow = useRef(new Audio("sfx/medicine/swallow.mp3"));
+  const medicine1 = useRef(new Audio("sfx/medicine/medicine1.mp3"));
+  const medicine2 = useRef(new Audio("sfx/medicine/medicine2.mp3"));
+  const medicine3 = useRef(new Audio("sfx/medicine/medicine3.mp3"));
   
   const death = useRef(new Audio("sfx/death.mp3"));
 
@@ -41,7 +43,8 @@ function App() {
     [ // Medicines
       "img/medicine/stomach-medicine.png",
       "img/medicine/painkiller.png",
-      "img/medicine/pills.png"
+      "img/medicine/pills.png",
+      "img/medicine/iv-drip.png"
     ]
   ];
 
@@ -52,10 +55,7 @@ function App() {
     "water",
     "milk",
     "lemonade",
-    "fresh orange juice",
-    "stomach medicine",
-    "painkiller",
-    "pills"
+    "fresh orange juice"
   ];
 
   const [encyclopediaOpened, setEncyclopediaOpened] = useState(false);
@@ -178,7 +178,7 @@ function App() {
     if (healthyFoods.includes(food)) {
       setHealth((prevHealth) => prevHealth + 10);
       setHealthEffect(1);
-    } else {
+    } else if (type !== 2) {
       setHealth((prevHealth) => prevHealth - 10);
       setHealthEffect(2);
     }
@@ -273,7 +273,26 @@ function App() {
             setThirst((prevThirst) => prevThirst + 60);
             break;
           default:
-            console.error("Invalid food!");
+            console.error("Invalid drink!");
+        }
+        break;
+      case 2:
+        switch (food) {
+          case "stomach medicine":
+            setHealth((prevHealth) => prevHealth + 20);
+            setHunger(100);
+            break;
+          case "painkiller":
+            setHealth(100);
+            break;
+          case "pills":
+            setHealth((prevHealth) => prevHealth + 40);
+            break;
+          case "iv drip":
+            setThirst(100);
+            break;
+          default:
+            console.error("Invalid medicine!");
         }
         break;
       default:
@@ -287,16 +306,16 @@ function App() {
         switch (randomSfx) {
           case 0:
             if (!eat1.current.paused) eat1.current.currentTime = 0; // Restart if already playing
-              eat1.current.play().catch((error) => console.error("Audio play error:", error));
-              break;
+            eat1.current.play().catch((error) => console.error("Audio play error:", error));
+            break;
           case 1:
             if (!eat2.current.paused) eat2.current.currentTime = 0;
-              eat2.current.play().catch((error) => console.error("Audio play error:", error));
-              break;
+            eat2.current.play().catch((error) => console.error("Audio play error:", error));
+            break;
           case 2:
             if (!eat3.current.paused) eat3.current.currentTime = 0;
-              eat3.current.play().catch((error) => console.error("Audio play error:", error));
-              break;
+            eat3.current.play().catch((error) => console.error("Audio play error:", error));
+            break;
           default:
             console.error("Invalid randomSfx!");
         }
@@ -305,23 +324,37 @@ function App() {
         switch (randomSfx) {
           case 0:
             if (!drink1.current.paused) drink1.current.currentTime = 0;
-              drink1.current.play().catch((error) => console.error("Audio play error:", error));
-              break;
+            drink1.current.play().catch((error) => console.error("Audio play error:", error));
+            break;
           case 1:
             if (!drink2.current.paused) drink2.current.currentTime = 0;
-              drink2.current.play().catch((error) => console.error("Audio play error:", error));
-              break;
+            drink2.current.play().catch((error) => console.error("Audio play error:", error));
+            break;
           case 2:
             if (!drink3.current.paused) drink3.current.currentTime = 0;
-              drink3.current.play().catch((error) => console.error("Audio play error:", error));
-              break;
+            drink3.current.play().catch((error) => console.error("Audio play error:", error));
+            break;
           default:
             console.error("Invalid randomSfx!");
         }
         break;
       case 2:
-        if (!swallow.current.paused) swallow.current.currentTime = 0;
-        swallow.current.play().catch((error) => console.error("Audio play error:", error));
+        switch (randomSfx) {
+          case 0:
+            if (!medicine1.current.paused) medicine1.current.currentTime = 0;
+            medicine1.current.play().catch((error) => console.error("Audio play error:", error));
+            break;
+          case 1:
+            if (!medicine2.current.paused) medicine2.current.currentTime = 0;
+            medicine2.current.play().catch((error) => console.error("Audio play error:", error));
+            break;
+          case 2:
+            if (!medicine3.current.paused) medicine3.current.currentTime = 0;
+            medicine3.current.play().catch((error) => console.error("Audio play error:", error));
+            break;
+          default:
+            console.error("Invalid randomSfx!");
+        }
         break;
       default:
         console.error("Invalid type!");
