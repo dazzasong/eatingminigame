@@ -1,1 +1,1 @@
-A project I made for fun.
+A project I made for fun. Check planned_updates for what's to come next!

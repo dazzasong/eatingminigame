@@ -1,5 +1,8 @@
-NEXT: Add overeating feature
+NEXT: Add medicines
 
-PLANNED:
+PLANNED: BPM that effects if your health is regenerating, more sfx, more food
 
-BUGS TO FIX: change throw new error to console.error
+BUGS TO FIX:
+
+- when dead, death sound effect still plays when opening or closing encyclopedia
+- on restart, overeating effect text appears

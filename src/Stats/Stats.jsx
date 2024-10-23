@@ -6,13 +6,13 @@ import ThirstBar from "./ThirstBar";
 import TotalConsumed from "./TotalConsumed";
 import Timer from "./Timer";
 
-export default function Stats({ health, hunger, thirst, calories, totalConsumed, hours }) {
+export default function Stats({ health, healthEffect, setHealthEffect, hunger, hungerEffect, setHungerEffect, thirst, thirstEffect, setThirstEffect, calories, totalConsumed, hours }) {
   return (
-    <Stack direction="row" justifyContent="space-between" mx={1}>
+    <Stack direction="row" justifyContent="space-between" m={1}>
       <Box>
-        <HealthBar value={health} />
-        <HungerBar value={hunger} />
-        <ThirstBar value={thirst} />
+        <HealthBar value={health} effect={healthEffect} setEffect={setHealthEffect} />
+        <HungerBar value={hunger} effect={hungerEffect} setEffect={setHungerEffect} />
+        <ThirstBar value={thirst} effect={thirstEffect} setEffect={setThirstEffect} />
       </Box>
       <Box>
         <Timer value={hours} />

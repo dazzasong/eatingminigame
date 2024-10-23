@@ -6,7 +6,7 @@ import { ArrowBack, AutoStories } from "@mui/icons-material";
 import Stats from "./Stats/Stats";
 
 function App() {
-  const dead = useRef(new Audio("sfx/dead.mp3"));
+  const death = useRef(new Audio("sfx/death.mp3"));
 
   const eat1 = useRef(new Audio("sfx/eat/eat1.mp3"));
   const eat2 = useRef(new Audio("sfx/eat/eat2.mp3"));
@@ -46,15 +46,19 @@ function App() {
   const [foods, setFoods] = useState([]);
 
   const [health, setHealth] = useState(100);
+  const [healthEffect, setHealthEffect] = useState(0); // 0: None | 1: Consumed healthy | 2: Consumed unhealthy
   const [hunger, setHunger] = useState(100);
+  const [hungerEffect, setHungerEffect] = useState(0); // 0: None | 1: Overeating
   const [thirst, setThirst] = useState(100);
+  const [thirstEffect, setThirstEffect] = useState(0); // 0: None | 1: Overhydrated
   const [calories, setCalories] = useState(0);
   const [totalConsumed, setTotalConsumed] = useState(0);
   const [hours, setHours] = useState(0);
 
   let isDead = health <= 0;
 
-  if (isDead) dead.play().catch((error) => console.error("Audio play error:", error));
+  if (isDead) death.current.play().catch((error) => console.error("Audio play error:", error));
+
 
   // Increments hours every 3 quarters of a second (1 game hour)
   useEffect(() => {
@@ -74,24 +78,32 @@ function App() {
     if (isDead) clearInterval(interval);
     return () => clearInterval(interval);
   // eslint-disable-next-line
-  }, [hunger > 0 && thirst > 0, isDead, health > 100]);
+  }, [hunger > 0 && thirst > 0, health > 100, isDead ]);
 
   // Decrements hunger by 2 every second
   useEffect(() => {
     const interval = setInterval(() => setHunger((prevHunger) => prevHunger - 2), 1000);
 
-    if (hunger > 100) setHunger(100);
+    if (hunger > 100) {
+      setHunger(100);
+      setHealth((prevHealth) => prevHealth - 10);
+      setHungerEffect(1);
+    }
 
     if (hunger < 1 || isDead) clearInterval(interval);
     return () => clearInterval(interval);
   // eslint-disable-next-line
-  }, [hunger < 1 || isDead, hunger > 100]);
+  }, [hunger > 100, hunger < 1, isDead]);
 
   // Decrements thirst by 2 every second
   useEffect(() => {
     const interval = setInterval(() => setThirst((prevThirst) => prevThirst - 2), 1000);
 
-    if (thirst > 100) setThirst(100);
+    if (thirst > 100) {
+      setThirst(100);
+      setHealth((prevHealth) => prevHealth - 10);
+      setThirstEffect(1);
+    }
 
     if (thirst < 1 || isDead) clearInterval(interval);
     return () => clearInterval(interval);
@@ -109,11 +121,14 @@ function App() {
 
   const restart = () => {
     setHealth(100);
+    setHealthEffect(0);
     setHunger(100);
+    setHealthEffect(0);
     setThirst(100);
+    setThirstEffect(0);
     setCalories(0);
     setTotalConsumed(0);
-    setHours(0)
+    setHours(0);
   };
 
   const addRandomFood = () => {
@@ -141,8 +156,13 @@ function App() {
 
     let food = src.split("/").pop().split(".")[0].replace(/-/g, " ");
 
-    if (healthyFoods.includes(food)) setHealth((prevHealth) => prevHealth + 10);
-    else setHealth((prevHealth) => prevHealth - 10);
+    if (healthyFoods.includes(food)) {
+      setHealth((prevHealth) => prevHealth + 10);
+      setHealthEffect(1);
+    } else {
+      setHealth((prevHealth) => prevHealth - 10);
+      setHealthEffect(2);
+    }
 
     switch (type) {
       case 0:
@@ -291,8 +311,14 @@ function App() {
         <Box>
           <Stats
             health={health}
+            healthEffect={healthEffect}
+            setHealthEffect={setHealthEffect}
             hunger={hunger}
+            hungerEffect={hungerEffect}
+            setHungerEffect={setHungerEffect}
             thirst={thirst}
+            thirstEffect={thirstEffect}
+            setThirstEffect={setThirstEffect}
             calories={calories}
             totalConsumed={totalConsumed}
             hours={hours}
