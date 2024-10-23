@@ -171,7 +171,7 @@ function App() {
 
   const consume = (id, src, type) => {
     setFoods((prevFood) => prevFood.filter((food) => food.id !== id));
-    setTotalConsumed((prevTotalConsumed) => prevTotalConsumed + 1);
+    if (type !== 2) setTotalConsumed((prevTotalConsumed) => prevTotalConsumed + 1);
 
     let food = src.split("/").pop().split(".")[0].replace(/-/g, " ");
 
