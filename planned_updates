@@ -1,7 +1,8 @@
-NEXT: Add medicines
+NEXT: more food
 
-PLANNED: BPM that effects if your health is regenerating, more sfx, more food
+PLANNED: BPM that effects if your health is regenerating
 
 BUGS TO FIX:
 
 - when dead, death sound effect still plays when opening or closing encyclopedia
+- audio keeps delaying/lagging

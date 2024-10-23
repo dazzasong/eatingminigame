@@ -4,7 +4,7 @@ import { List, ListItem, ListItemIcon, ListItemText, ListSubheader, Stack, Typog
 function Entry({ subject, src, healthy, description, stats }) {
   return (
     <Stack spacing={1} width={350}>
-      <Typography fontSize={24} sx={{ userSelect: "none" }}>{subject}</Typography>
+      <Typography fontSize={24}>{subject}</Typography>
       <img
         src={src}
         alt={subject}
@@ -13,8 +13,8 @@ function Entry({ subject, src, healthy, description, stats }) {
         style={{ userSelect: "none" }}
       />
       <Typography color={healthy ? "success" : "error"} fontWeight="bold"><u>{healthy ? "HEALTHY" : "UNHEALTHY"}</u></Typography>
-      <Typography sx={{ userSelect: "none" }}>{description}</Typography>
-      <List dense sx={{ userSelect: "none" }}>
+      <Typography>{description}</Typography>
+      <List dense>
         <ListSubheader>Stats</ListSubheader>
         <ListItem>
           <ListItemIcon><CookieOutlined /></ListItemIcon>

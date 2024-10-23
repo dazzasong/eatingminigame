@@ -3,7 +3,8 @@ import Food from "./Food";
 import Encyclopedia from "./Encyclopedia";
 import { useEffect, useRef, useState } from "react";
 import { Box, Button, Fab, Stack, Typography } from "@mui/material";
-import { ArrowBack, AutoStories, Medication } from "@mui/icons-material";
+import { ArrowBack, AutoStories } from "@mui/icons-material";
+import RequestMeds from "./RequestMeds";
 
 function App() {
   const eat1 = useRef(new Audio("sfx/eat/eat1.mp3"));
@@ -83,8 +84,8 @@ function App() {
     const interval = setInterval(() => setHours((prevTimer) => prevTimer + 1), 750);
 
     if (isDead) clearInterval(interval);
+
     return () => clearInterval(interval);
-  // eslint-disable-next-line
   }, [isDead]);
 
   // Updates health to increment if nourished or decrement if malnourished
@@ -94,9 +95,9 @@ function App() {
     if (health > 100) setHealth(100);
 
     if (isDead) clearInterval(interval);
+
     return () => clearInterval(interval);
-  // eslint-disable-next-line
-  }, [hunger > 0 && thirst > 0, health > 100, isDead ]);
+  }, [health, hunger, thirst, isDead ]);
 
   // Decrements hunger by 2 every second
   useEffect(() => {
@@ -109,9 +110,9 @@ function App() {
     }
 
     if (hunger < 1 || isDead) clearInterval(interval);
+
     return () => clearInterval(interval);
-  // eslint-disable-next-line
-  }, [hunger > 100, hunger < 1, isDead]);
+  }, [hunger, isDead]);
 
   // Decrements thirst by 2 every second
   useEffect(() => {
@@ -124,15 +125,16 @@ function App() {
     }
 
     if (thirst < 1 || isDead) clearInterval(interval);
+
     return () => clearInterval(interval);
-  // eslint-disable-next-line
-  }, [thirst < 1 || isDead, thirst > 100]);
+  }, [thirst, isDead]);
 
   // Adds food every 2 seconds
   useEffect(() => {
     const interval = setInterval(() => addRandomFood(), 2000);
 
     if (isDead) clearInterval(interval);
+
     return () => clearInterval(interval);
   // eslint-disable-next-line
   }, [isDead, requestedMeds]);
@@ -362,7 +364,7 @@ function App() {
   };
 
   return (
-    <Box>
+    <Box sx={{ userSelect: "none" }}>
       { !encyclopediaOpened &&
         <Box>
           <Stats
@@ -396,15 +398,7 @@ function App() {
               ))}
             </Box>
           }
-          <Button
-            onClick={() => setRequestedMeds(true)}
-            variant="contained"
-            color="success"
-            size="small"
-            startIcon={<Medication />}
-          >
-            <b>REQUEST MEDS</b>
-          </Button>
+          <RequestMeds requestedMeds={requestedMeds} setRequestedMeds={setRequestedMeds} health={health} />
           { health < 1 &&
             <Stack position="relative" alignItems="center" top={170}>
               <Typography color="error" fontSize={60} fontWeight="bold">YOU DIED!</Typography>
