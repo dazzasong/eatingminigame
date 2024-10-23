@@ -1,19 +1,20 @@
-import Encyclopedia from "./Encyclopedia";
+import Stats from "./Stats/Stats";
 import Food from "./Food";
+import Encyclopedia from "./Encyclopedia";
 import { useEffect, useRef, useState } from "react";
 import { Box, Button, Fab, Stack, Typography } from "@mui/material";
 import { ArrowBack, AutoStories, Medication } from "@mui/icons-material";
-import Stats from "./Stats/Stats";
 
 function App() {
-  const death = useRef(new Audio("sfx/death.mp3"));
-
   const eat1 = useRef(new Audio("sfx/eat/eat1.mp3"));
   const eat2 = useRef(new Audio("sfx/eat/eat2.mp3"));
   const eat3 = useRef(new Audio("sfx/eat/eat3.mp3"));
   const drink1 = useRef(new Audio("sfx/drink/drink1.mp3"));
   const drink2 = useRef(new Audio("sfx/drink/drink2.mp3"));
   const drink3 = useRef(new Audio("sfx/drink/drink3.mp3"));
+  const swallow = useRef(new Audio("sfx/medicine/swallow.mp3"));
+  
+  const death = useRef(new Audio("sfx/death.mp3"));
 
   const srcs = [
     [ // Food
@@ -44,7 +45,18 @@ function App() {
     ]
   ];
 
-  const healthyFoods = ["apple", "banana", "salad", "water", "milk", "lemonade", "fresh orange juice"];
+  const healthyFoods = [
+    "apple",
+    "banana",
+    "salad",
+    "water",
+    "milk",
+    "lemonade",
+    "fresh orange juice",
+    "stomach medicine",
+    "painkiller",
+    "pills"
+  ];
 
   const [encyclopediaOpened, setEncyclopediaOpened] = useState(false);
 
@@ -123,7 +135,7 @@ function App() {
     if (isDead) clearInterval(interval);
     return () => clearInterval(interval);
   // eslint-disable-next-line
-  }, [isDead]);
+  }, [isDead, requestedMeds]);
 
   const restart = () => {
     setHealth(100);
@@ -275,16 +287,16 @@ function App() {
         switch (randomSfx) {
           case 0:
             if (!eat1.current.paused) eat1.current.currentTime = 0; // Restart if already playing
-            eat1.current.play().catch((error) => console.error("Audio play error:", error));
-            break;
+              eat1.current.play().catch((error) => console.error("Audio play error:", error));
+              break;
           case 1:
             if (!eat2.current.paused) eat2.current.currentTime = 0;
-            eat2.current.play().catch((error) => console.error("Audio play error:", error));
-            break;
+              eat2.current.play().catch((error) => console.error("Audio play error:", error));
+              break;
           case 2:
             if (!eat3.current.paused) eat3.current.currentTime = 0;
-            eat3.current.play().catch((error) => console.error("Audio play error:", error));
-            break;
+              eat3.current.play().catch((error) => console.error("Audio play error:", error));
+              break;
           default:
             console.error("Invalid randomSfx!");
         }
@@ -293,19 +305,23 @@ function App() {
         switch (randomSfx) {
           case 0:
             if (!drink1.current.paused) drink1.current.currentTime = 0;
-            drink1.current.play().catch((error) => console.error("Audio play error:", error));
-            break;
+              drink1.current.play().catch((error) => console.error("Audio play error:", error));
+              break;
           case 1:
             if (!drink2.current.paused) drink2.current.currentTime = 0;
-            drink2.current.play().catch((error) => console.error("Audio play error:", error));
-            break;
+              drink2.current.play().catch((error) => console.error("Audio play error:", error));
+              break;
           case 2:
             if (!drink3.current.paused) drink3.current.currentTime = 0;
-            drink3.current.play().catch((error) => console.error("Audio play error:", error));
-            break;
+              drink3.current.play().catch((error) => console.error("Audio play error:", error));
+              break;
           default:
             console.error("Invalid randomSfx!");
         }
+        break;
+      case 2:
+        if (!swallow.current.paused) swallow.current.currentTime = 0;
+        swallow.current.play().catch((error) => console.error("Audio play error:", error));
         break;
       default:
         console.error("Invalid type!");
