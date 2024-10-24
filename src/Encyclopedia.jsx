@@ -58,17 +58,6 @@ export default function Encyclopedia() {
       }
     },
     {
-      subject: "Burger",
-      src: "img/food/burger.png",
-      healthy: false,
-      description: "A grilled patty between two buns. Can contain veggies, cheese, sauces and other meats.",
-      stats: {
-        calories: 254,
-        hunger: 60,
-        thirst: -20
-      }
-    },
-    {
       subject: "Chips",
       src: "img/food/chips.png",
       healthy: false,
@@ -91,6 +80,17 @@ export default function Encyclopedia() {
       }
     },
     {
+      subject: "Burger",
+      src: "img/food/burger.png",
+      healthy: false,
+      description: "A grilled patty between two buns. Can contain veggies, cheese, sauces and other meats.",
+      stats: {
+        calories: 254,
+        hunger: 60,
+        thirst: -20
+      }
+    },
+    {
       subject: "Hotdog",
       src: "img/food/hotdog.png",
       healthy: false,
@@ -99,6 +99,17 @@ export default function Encyclopedia() {
         calories: 151,
         hunger: 60,
         thirst: -20
+      }
+    },
+    {
+      subject: "Salad",
+      src: "img/food/salad.png",
+      healthy: true,
+      description: "A plate of vegetables and fruit with dressings added.",
+      stats: {
+        calories: 187,
+        hunger: 50,
+        thirst: 25
       }
     },
     {
@@ -121,17 +132,6 @@ export default function Encyclopedia() {
         calories: 218,
         hunger: 40,
         thirst: -20
-      }
-    },
-    {
-      subject: "Salad",
-      src: "img/food/salad.png",
-      healthy: true,
-      description: "A plate of vegetables and fruit with dressings added.",
-      stats: {
-        calories: 187,
-        hunger: 50,
-        thirst: 25
       }
     }
   ];
