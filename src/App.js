@@ -1,10 +1,11 @@
 import Stats from "./Stats/Stats";
 import Food from "./Food";
+import RequestMeds from "./RequestMeds";
+import Death from "./Death";
 import Encyclopedia from "./Encyclopedia";
 import { useEffect, useRef, useState } from "react";
-import { Box, Button, Fab, Stack, Typography } from "@mui/material";
+import { Box, Fab } from "@mui/material";
 import { ArrowBack, AutoStories } from "@mui/icons-material";
-import RequestMeds from "./RequestMeds";
 
 function App() {
   const eat1 = useRef(new Audio("sfx/eat/eat1.mp3"));
@@ -60,9 +61,9 @@ function App() {
     "lemonade"
   ];
 
-  const [encyclopediaOpened, setEncyclopediaOpened] = useState(false);
-
   const [foods, setFoods] = useState([]);
+  
+  const [encyclopediaOpened, setEncyclopediaOpened] = useState(false);
 
   const [health, setHealth] = useState(100);
   const [healthEffect, setHealthEffect] = useState(0); // 0: None | 1: Consumed healthy | 2: Consumed unhealthy
@@ -77,9 +78,14 @@ function App() {
   const [requestedMeds, setRequestedMeds] = useState(false);
   const [count, setCount] = useState(10);
 
+  const [highScore, setHighScore] = useState(0);
+
   let isDead = health <= 0;
 
-  if (isDead) death.current.play().catch((error) => console.error("Audio play error:", error));
+  if (isDead) {
+    if (calories > highScore) setHighScore(calories);
+    death.current.play().catch((error) => console.error("Audio play error:", error));
+  }
 
   const restart = () => {
     setHealth(100);
@@ -413,10 +419,7 @@ function App() {
           }
           <RequestMeds requestedMeds={requestedMeds} setRequestedMeds={setRequestedMeds} count={count} setCount={setCount} health={health} isDead={isDead} />
           { health < 1 &&
-            <Stack position="relative" alignItems="center" top={170}>
-              <Typography color="error" fontSize={60} fontWeight="bold">YOU DIED!</Typography>
-              <Button onClick={restart} variant="contained" color="warning">Try again?</Button>
-            </Stack>
+            <Death restart={restart} highScore={highScore} />
           }
         </Box>
       }
