@@ -35,11 +35,12 @@ function App() {
       "img/drink/water.png",
       "img/drink/milk.png",
       "img/drink/lemonade.png",
-      "img/drink/fresh-orange-juice.png",
+      "img/drink/orange-juice.png",
       "img/drink/apple-juice.png",
       "img/drink/coke.png",
       "img/drink/fanta.png",
-      "img/drink/coffee.png"
+      "img/drink/coffee.png",
+      "img/drink/chocolate-milk.png"
     ],
     [ // Medicines
       "img/medicine/stomach-medicine.png",
@@ -55,8 +56,7 @@ function App() {
     "salad",
     "water",
     "milk",
-    "lemonade",
-    "fresh orange juice"
+    "lemonade"
   ];
 
   const [encyclopediaOpened, setEncyclopediaOpened] = useState(false);
@@ -252,7 +252,7 @@ function App() {
             setCalories((prevCalories) => prevCalories + 99);
             setThirst((prevThirst) => prevThirst + 70);
             break;
-          case "fresh orange juice":
+          case "orange juice":
             setCalories((prevCalories) => prevCalories + 111);
             setHunger((prevHunger) => prevHunger + 5);
             setThirst((prevThirst) => prevThirst + 60);
@@ -275,6 +275,11 @@ function App() {
           case "coffee":
             setHunger((prevHunger) => prevHunger + 5);
             setThirst((prevThirst) => prevThirst + 60);
+            break;
+          case "chocolate milk":
+            setCalories((prevCalories) => prevCalories + 209);
+            setHunger((prevHunger) => prevHunger + 15);
+            setThirst((prevThirst) => prevThirst + 40);
             break;
           default:
             console.error("Invalid drink!");
