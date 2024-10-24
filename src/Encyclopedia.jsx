@@ -124,13 +124,24 @@ export default function Encyclopedia() {
       }
     },
     {
+      subject: "Pancake",
+      src: "img/food/pancake.png",
+      healthy: false,
+      description: "Batter in the form of a circle. Syrup is poured onto it.",
+      stats: {
+        calories: 227,
+        hunger: 60,
+        thirst: -20
+      }
+    },
+    {
       subject: "Waffle",
       src: "img/food/waffle.png",
       healthy: false,
-      description: "Batter in the form of a circle with a pattern. Syrup is poured onto it.",
+      description: "Batter in the form of a circle with square patterns. Syrup is poured onto it.",
       stats: {
         calories: 218,
-        hunger: 40,
+        hunger: 60,
         thirst: -20
       }
     }

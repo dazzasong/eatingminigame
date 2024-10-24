@@ -27,6 +27,7 @@ function App() {
       "img/food/fries.png",
       "img/food/hotdog.png",
       "img/food/ice-cream.png",
+      "img/food/pancake.png",
       "img/food/waffle.png",
       "img/food/chips.png",
       "img/food/salad.png"
@@ -224,9 +225,14 @@ function App() {
             setHunger((prevHunger) => prevHunger + 40);
             setThirst((prevThirst) => prevThirst + 20);
             break;
+          case "pancake":
+            setCalories((prevCalories) => prevCalories + 227);
+            setHunger((prevHunger) => prevHunger + 60);
+            setThirst((prevThirst) => prevThirst - 20);
+            break;
           case "waffle":
             setCalories((prevCalories) => prevCalories + 218);
-            setHunger((prevHunger) => prevHunger + 40);
+            setHunger((prevHunger) => prevHunger + 60);
             setThirst((prevThirst) => prevThirst - 20);
             break;
           case "salad":
