@@ -74,10 +74,25 @@ function App() {
   const [hours, setHours] = useState(0);
 
   const [requestedMeds, setRequestedMeds] = useState(false);
+  const [count, setCount] = useState(10);
 
   let isDead = health <= 0;
 
   if (isDead) death.current.play().catch((error) => console.error("Audio play error:", error));
+
+  const restart = () => {
+    setHealth(100);
+    setHealthEffect(0);
+    setHunger(100);
+    setHealthEffect(0);
+    setThirst(100);
+    setThirstEffect(0);
+    setCalories(0);
+    setTotalConsumed(0);
+    setHours(0);
+    setRequestedMeds(false);
+    setCount(10);
+  };
 
   // Increments hours every 3 quarters of a second (1 game hour)
   useEffect(() => {
@@ -138,19 +153,6 @@ function App() {
     return () => clearInterval(interval);
   // eslint-disable-next-line
   }, [isDead, requestedMeds]);
-
-  const restart = () => {
-    setHealth(100);
-    setHealthEffect(0);
-    setHunger(100);
-    setHealthEffect(0);
-    setThirst(100);
-    setThirstEffect(0);
-    setCalories(0);
-    setTotalConsumed(0);
-    setHours(0);
-    setRequestedMeds(false);
-  };
 
   const addRandomFood = () => {
     const id = Math.random().toString(36).slice(2, 11);
@@ -398,7 +400,7 @@ function App() {
               ))}
             </Box>
           }
-          <RequestMeds requestedMeds={requestedMeds} setRequestedMeds={setRequestedMeds} health={health} />
+          <RequestMeds requestedMeds={requestedMeds} setRequestedMeds={setRequestedMeds} count={count} setCount={setCount} health={health} isDead={isDead} />
           { health < 1 &&
             <Stack position="relative" alignItems="center" top={170}>
               <Typography color="error" fontSize={60} fontWeight="bold">YOU DIED!</Typography>
